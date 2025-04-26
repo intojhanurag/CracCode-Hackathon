@@ -3,7 +3,7 @@ import { Groq } from "groq-sdk"
 
 // Initialize the Groq client
 const groq = new Groq({
-  apiKey: process.env.GROQ_API_KEY || "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",
+  apiKey: process.env.GROQ_API_KEY,
 })
 
 export interface QuizQuestion {
