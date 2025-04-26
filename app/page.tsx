@@ -70,14 +70,16 @@ export default function LandingPage() {
           <span className="text-xl font-bold">YTLearn</span>
         </div>
         <div className="flex items-center gap-4">
-          <Button
-            variant="outline"
-            size="sm"
-            className="hidden md:flex gap-2 border-indigo-700/30 bg-black/50 backdrop-blur-sm text-indigo-400 hover:bg-indigo-900/20"
-          >
-            <Github className="h-4 w-4" />
-            <span>Star on GitHub</span>
-          </Button>
+          <Link href="https://github.com/intojhanurag/CracCode-Hackathon">
+            <Button
+              variant="outline"
+              size="sm"
+              className="hidden md:flex gap-2 border-indigo-700/30 bg-black/50 backdrop-blur-sm text-indigo-400 hover:bg-indigo-900/20"
+            >
+              <Github className="h-4 w-4" />
+              <span>Star on GitHub</span>
+            </Button>
+          </Link>
           <Link href="/dashboard">
             <Button className="bg-gradient-to-r from-purple-600 via-blue-600 to-purple-600 hover:from-purple-700 hover:via-blue-700 hover:to-purple-700 border-0">
               Login
