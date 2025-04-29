@@ -80,7 +80,7 @@ export default function LandingPage() {
               <span>Star on GitHub</span>
             </Button>
           </Link>
-          <Link href="/dashboard">
+          <Link href="/sign-in">
             <Button className="bg-gradient-to-r from-purple-600 via-blue-600 to-purple-600 hover:from-purple-700 hover:via-blue-700 hover:to-purple-700 border-0">
               Login
             </Button>
