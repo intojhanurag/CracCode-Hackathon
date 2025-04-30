@@ -19,10 +19,10 @@ Welcome to **YouTube Learning Platform**, a structured and interactive way to le
 ## 🖼️ Screenshots
 
 ### Dashboard
-![Dashboard Screenshot](public/screenshots/dashboard.png)
+![Dashboard Screenshot]()
 
 ### Video Notes
-![Notes Screenshot](public/screenshots/notes.png)
+![Notes Screenshot](https://github.com/intojhanurag/CracCode-Hackathon/blob/cc26380c0963c7abfd1f4f3fd5494e877972c867/Screenshot%202025-04-30%20191851.png)
 
 ### Quizzes
 ![Quiz Screenshot](public/screenshots/quiz.png)
