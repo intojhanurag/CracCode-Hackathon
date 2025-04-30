@@ -18,9 +18,6 @@ Welcome to **YouTube Learning Platform**, a structured and interactive way to le
 
 ## 🖼️ Screenshots
 
-### Dashboard
-![Dashboard Screenshot]()
-
 ### Video Notes
 ![Notes Screenshot](https://github.com/intojhanurag/CracCode-Hackathon/blob/cc26380c0963c7abfd1f4f3fd5494e877972c867/Screenshot%202025-04-30%20191851.png)
 
@@ -43,7 +40,6 @@ Welcome to **YouTube Learning Platform**, a structured and interactive way to le
 
 ### Prerequisites
 - Node.js (v16+)
-- MongoDB
 - YouTube Data API Key
 - Clerk API Key
 
@@ -108,10 +104,6 @@ MongoDB for database management.
 
 📧 Contact
 For any questions or feedback, feel free to reach out:
-
-Email: your-email@example.com
-GitHub: @your-username
-LinkedIn: Your Name
 
 ⭐ Star the Repository
 If you found this project helpful, please give it a ⭐ on GitHub!
