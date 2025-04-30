@@ -44,10 +44,13 @@ export function Header() {
 
           {/* User Profile, GitHub, and Dashboard */}
           <div className="hidden md:flex items-center gap-4">
-            <Button variant="outline" size="sm" className="gap-2">
-              <Github className="h-4 w-4" />
-              <span>Star on GitHub</span>
-            </Button>
+            <Link href="https://github.com/intojhanurag/CracCode-Hackathon">
+              <Button variant="outline" size="sm" className="gap-2">
+                <Github className="h-4 w-4" />
+                <span>Star on GitHub</span>
+              </Button>
+            </Link>
+            
             <Link
               href="/dashboard"
               className="px-4 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-700 transition"
@@ -124,14 +127,19 @@ export function Header() {
             >
               Dashboard
             </Link>
-            <Button
-              variant="outline"
-              size="sm"
-              className="w-full gap-2 mt-2 flex justify-center"
-            >
-              <Github className="h-4 w-4" />
-              <span>Star on GitHub</span>
-            </Button>
+
+            <Link href="https://github.com/intojhanurag/CracCode-Hackathon">
+              <Button
+                variant="outline"
+                size="sm"
+                className="w-full gap-2 mt-2 flex justify-center"
+              >
+                <Github className="h-4 w-4" />
+                <span>Star on GitHub</span>
+              </Button>
+
+            </Link>
+            
 
             {/* Profile Icon for Mobile */}
             <div className="flex justify-center mt-4">

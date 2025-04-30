@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { CircularProgress } from "@/components/ui/circular-progress"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
+import Link from "next/link"
 import { Award, BookOpen, Calendar, Clock, Github, Users } from "lucide-react"
 
 export default function ProfilePage() {
@@ -328,10 +329,14 @@ export default function ProfilePage() {
               <span>1,234 active users</span>
             </Badge>
           </div>
-          <Button variant="outline" size="sm" className="gap-2">
-            <Github className="h-4 w-4" />
-            <span>Star on GitHub</span>
-          </Button>
+
+          <Link href="https://github.com/intojhanurag/CracCode-Hackathon">
+            <Button variant="outline" size="sm" className="gap-2">
+              <Github className="h-4 w-4" />
+              <span>Star on GitHub</span>
+            </Button>      
+          </Link>
+          
         </div>
       </div>
     </div>

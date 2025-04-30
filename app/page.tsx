@@ -3,12 +3,15 @@
 import type React from "react"
 
 import Link from "next/link"
-import { Github, Twitter } from "lucide-react"
+import { Github, Twitter, Youtube } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useRef, useState } from "react"
+import {useUser} from "@clerk/nextjs";
+import YouTubeHero from "@/components/Youtube-hero"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 export default function LandingPage() {
+  const {user}=useUser();
   const demoRef = useRef<HTMLDivElement>(null)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
 
@@ -22,6 +25,8 @@ export default function LandingPage() {
 
     setMousePosition({ x, y })
   }
+
+  const avatarSrc = "/profile.webp";
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden" onMouseMove={handleMouseMove}>
@@ -46,7 +51,7 @@ export default function LandingPage() {
             {Array.from({ length: 20 }).map((_, i) => (
               <div
                 key={i}
-                className="grid-dot absolute rounded-full bg-blue-500/20"
+                className="grid-dot absolute rounded-full bg-red-500/20"
                 style={{
                   width: Math.random() * 4 + 2 + "px",
                   height: Math.random() * 4 + 2 + "px",
@@ -60,13 +65,14 @@ export default function LandingPage() {
           </div>
 
           {/* Glow effect */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(120,120,255,0.25)_0%,_rgba(0,0,0,0)_70%)] glow-effect"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(255,0,0,0.25)_0%,_rgba(0,0,0,0)_70%)] glow-effect"></div>
         </div>
       </div>
 
       {/* Header */}
       <header className="relative z-10 container mx-auto px-4 py-6 flex justify-between items-center">
         <div className="flex items-center gap-2">
+          <Youtube className="h-6 w-6 text-red-500" />
           <span className="text-xl font-bold">YTLearn</span>
         </div>
         <div className="flex items-center gap-4">
@@ -80,20 +86,29 @@ export default function LandingPage() {
               <span>Star on GitHub</span>
             </Button>
           </Link>
-          <Link href="/sign-in">
-            <Button className="bg-gradient-to-r from-purple-600 via-blue-600 to-purple-600 hover:from-purple-700 hover:via-blue-700 hover:to-purple-700 border-0">
-              Login
-            </Button>
-          </Link>
+          {/* Show Profile Icon if Logged In, Otherwise Show Login Button */}
+          {user ? (
+            <Link href="/dashboard">
+              <Button variant="ghost" size="icon" className="rounded-full">
+                <Avatar className="h-8 w-8 border">
+                  <AvatarImage src={avatarSrc} alt="User" />
+                  <AvatarFallback>{user.firstName?.charAt(0) || "U"}</AvatarFallback>
+                </Avatar>
+              </Button>
+            </Link>
+          ) : (
+            <Link href="/sign-in">
+              <Button className="bg-gradient-to-r from-purple-600 via-blue-600 to-purple-600 hover:from-purple-700 hover:via-blue-700 hover:to-purple-700 border-0">
+                Login
+              </Button>
+            </Link>
+          )}
         </div>
       </header>
-
+      <YouTubeHero/>
       {/* Hero Section */}
-      <main className="relative z-10 container mx-auto px-4 py-20 text-center">
-        <div className="inline-flex items-center gap-2 bg-black/50 backdrop-blur-sm px-4 py-2 rounded-full mb-6 border border-gray-800">
-          <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
-          <span className="text-sm">Proudly Open Source</span>
-        </div>
+      {/* <main className="relative z-10 container mx-auto px-4 py-20 text-center">
+        
 
         <h1 className="text-5xl md:text-7xl font-bold mb-6 max-w-4xl mx-auto text-glow">
           Follow any playlist like a paid course
@@ -112,16 +127,16 @@ export default function LandingPage() {
             Get Started
           </Button>
         </Link>
-      </main>
+      </main> */}
 
       {/* 3D Demo Section */}
       <section className="relative z-10 container mx-auto px-4 py-16">
         <div
           ref={demoRef}
-          className="bg-black/40 backdrop-blur-sm rounded-xl border border-indigo-900/30 p-6 md:p-8 max-w-5xl mx-auto shadow-glow transition-all duration-200 ease-out"
+          className="bg-black/40 backdrop-blur-sm rounded-xl border border-red-900/30 p-6 md:p-8 max-w-5xl mx-auto shadow-glow transition-all duration-200 ease-out"
           style={{
             transform: `perspective(1000px) rotateX(${mousePosition.y * 5}deg) rotateY(${mousePosition.x * -5}deg)`,
-            boxShadow: `0 0 30px rgba(120, 120, 255, 0.3), 
+            boxShadow: `0 0 30px rgba(255, 0, 0, 0.3),  
                 ${mousePosition.x * 20}px ${mousePosition.y * 20}px 60px rgba(120, 120, 255, 0.15)`,
           }}
         >
