@@ -25,7 +25,7 @@ Welcome to **YouTube Learning Platform**, a structured and interactive way to le
 ![Notes Screenshot](https://github.com/intojhanurag/CracCode-Hackathon/blob/cc26380c0963c7abfd1f4f3fd5494e877972c867/Screenshot%202025-04-30%20191851.png)
 
 ### Quizzes
-![Quiz Screenshot](public/screenshots/quiz.png)
+![Quiz Screenshot](https://github.com/intojhanurag/CracCode-Hackathon/blob/7da04a8c3c7c4eb1983ab71d9d47c2f6952af9e3/Screenshot%202025-04-30%20191901.png)
 
 ---
 
