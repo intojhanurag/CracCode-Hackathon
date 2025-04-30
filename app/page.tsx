@@ -106,29 +106,7 @@ export default function LandingPage() {
         </div>
       </header>
       <YouTubeHero/>
-      {/* Hero Section */}
-      {/* <main className="relative z-10 container mx-auto px-4 py-20 text-center">
-        
-
-        <h1 className="text-5xl md:text-7xl font-bold mb-6 max-w-4xl mx-auto text-glow">
-          Follow any playlist like a paid course
-        </h1>
-
-        <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
-          Transform YouTube playlists into structured courses with progress tracking, AI-generated assignments, quizzes,
-          and documentation.
-        </p>
-
-        <Link href="/dashboard">
-          <Button
-            size="lg"
-            className="bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 hover:from-purple-700 hover:via-blue-700 hover:to-indigo-700 text-lg px-8 py-6 h-auto shadow-glow transition-all duration-300"
-          >
-            Get Started
-          </Button>
-        </Link>
-      </main> */}
-
+      
       {/* 3D Demo Section */}
       <section className="relative z-10 container mx-auto px-4 py-16">
         <div
@@ -141,329 +119,11 @@ export default function LandingPage() {
           }}
         >
           <h2 className="text-2xl font-bold mb-6">Complete Learning Experience</h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div className="md:col-span-3">
-              <div className="bg-gray-900/80 rounded-lg border border-gray-800 overflow-hidden shadow-inner">
-                <div className="p-4 border-b border-gray-800 flex items-center justify-between">
-                  <h3 className="font-medium">React TypeScript Tutorial</h3>
-                  <span className="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded">Progress: 42%</span>
-                </div>
-
-                <div className="divide-y divide-gray-800">
-                  {/* Video Item */}
-                  <div className="p-4 flex gap-4">
-                    <div className="w-[120px] h-[68px] bg-gray-800 rounded flex-shrink-0 flex items-center justify-center">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="text-red-500"
-                      >
-                        <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path>
-                        <path d="m10 15 5-3-5-3z"></path>
-                      </svg>
-                    </div>
-                    <div className="flex-1">
-                      <h4 className="font-medium">1. TypeScript Setup with React</h4>
-                      <div className="flex items-center gap-2 mt-1">
-                        <span className="text-xs text-gray-400">10:15</span>
-                        <span className="h-1 w-1 rounded-full bg-gray-500"></span>
-                        <span className="text-xs text-green-400">Completed</span>
-                      </div>
-
-                      <div className="mt-2 flex flex-wrap gap-2">
-                        <button className="text-xs text-blue-400 flex items-center gap-1">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="12"
-                            height="12"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
-                          </svg>
-                          Assignment
-                        </button>
-                        <button className="text-xs text-purple-400 flex items-center gap-1">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="12"
-                            height="12"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
-                          </svg>
-                          Documentation
-                        </button>
-                        <button className="text-xs text-yellow-400 flex items-center gap-1">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="12"
-                            height="12"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path d="M8.8 20v-4.1l1.9.2a2.3 2.3 0 0 0 2.164-2.1V8.3A5.37 5.37 0 0 0 2 8.25c0 2.8.656 3.95 1 4.8a.671.671 0 0 1-.656.75.64.64 0 0 1-.344-.1"></path>
-                            <path d="M19.8 17.817a2.5 2.5 0 0 0-2.5-2.5c-.644 0-1.35.21-2.3.6-1.8.744-2.063.356-2.5 0"></path>
-                            <path d="M8.8 15.817c2 .744 2.731.356 3.3 0"></path>
-                          </svg>
-                          Quiz
-                        </button>
-                        <button className="text-xs text-green-400 flex items-center gap-1">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="12"
-                            height="12"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
-                            <path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"></path>
-                            <path d="M9 9h1"></path>
-                            <path d="M9 13h6"></path>
-                            <path d="M9 17h6"></path>
-                          </svg>
-                          Notes
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Documentation Section */}
-                  <div className="p-4 bg-gray-800/50">
-                    <div className="flex items-center justify-between mb-3">
-                      <h4 className="font-medium text-purple-400 flex items-center gap-1">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
-                        </svg>
-                        Documentation & Resources:
-                      </h4>
-                    </div>
-                    <div className="space-y-2">
-                      <div className="flex items-start p-2 rounded-md bg-gray-700/30">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          className="mr-2 text-purple-400 mt-0.5"
-                        >
-                          <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
-                        </svg>
-                        <div className="flex-1">
-                          <div className="font-medium text-sm">TypeScript Handbook: React Integration</div>
-                          <div className="text-xs text-gray-400">typescriptlang.org</div>
-                        </div>
-                        <div className="text-xs bg-purple-500/20 text-purple-400 px-2 py-0.5 rounded">Docs</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Quiz Section */}
-                  <div className="p-4 bg-gray-800/50">
-                    <div className="flex items-center justify-between mb-3">
-                      <h4 className="font-medium text-yellow-400 flex items-center gap-1">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path d="M8.8 20v-4.1l1.9.2a2.3 2.3 0 0 0 2.164-2.1V8.3A5.37 5.37 0 0 0 2 8.25c0 2.8.656 3.95 1 4.8a.671.671 0 0 1-.656.75.64.64 0 0 1-.344-.1"></path>
-                          <path d="M19.8 17.817a2.5 2.5 0 0 0-2.5-2.5c-.644 0-1.35.21-2.3.6-1.8.744-2.063.356-2.5 0"></path>
-                          <path d="M8.8 15.817c2 .744 2.731.356 3.3 0"></path>
-                        </svg>
-                        Quiz Challenge:
-                      </h4>
-                    </div>
-                    <div className="space-y-3">
-                      <div className="text-sm">
-                        <p className="font-medium mb-2">
-                          What is the correct way to define a React component prop type in TypeScript?
-                        </p>
-                        <div className="space-y-1 ml-2">
-                          <div className="flex items-center">
-                            <div className="w-4 h-4 rounded-full border border-gray-600 mr-2 flex items-center justify-center">
-                              <div className="w-2 h-2 rounded-full bg-blue-500"></div>
-                            </div>
-                            <span className="text-sm">interface Props &#123; name: string; &#125;</span>
-                          </div>
-                          <div className="flex items-center">
-                            <div className="w-4 h-4 rounded-full border border-gray-600 mr-2"></div>
-                            <span className="text-sm">type Props = &#123; name: string; &#125;</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex justify-end">
-                        <button className="text-xs bg-yellow-500/20 text-yellow-400 px-3 py-1 rounded">
-                          Next Question
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Notes Section */}
-                  <div className="p-4 bg-gray-800/50">
-                    <div className="flex items-center justify-between mb-3">
-                      <h4 className="font-medium text-green-400 flex items-center gap-1">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
-                          <path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"></path>
-                          <path d="M9 9h1"></path>
-                          <path d="M9 13h6"></path>
-                          <path d="M9 17h6"></path>
-                        </svg>
-                        My Notes:
-                      </h4>
-                    </div>
-                    <div className="bg-gray-900/50 border border-gray-700 rounded-md p-3 text-sm">
-                      <p>Remember to install TypeScript with: npm install typescript @types/react @types/react-dom</p>
-                      <p className="mt-1">Key points:</p>
-                      <ul className="list-disc list-inside mt-1 space-y-1 text-gray-300">
-                        <li>Use interfaces for props and state</li>
-                        <li>FC type is deprecated, use function components</li>
-                        <li>Don't forget to type event handlers</li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  {/* Assignment Section */}
-                  <div className="p-4 bg-gray-800/50">
-                    <div className="flex items-center justify-between mb-3">
-                      <h4 className="font-medium text-blue-400 flex items-center gap-1">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-                          <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
-                        </svg>
-                        Assignment:
-                      </h4>
-                    </div>
-                    <ol className="list-decimal list-inside space-y-2 text-sm text-gray-300">
-                      <li>
-                        Create a simple React component with TypeScript that accepts props for name, age, and a callback
-                        function.
-                      </li>
-                      <li>Implement proper type definitions for all props and event handlers.</li>
-                      <li>Add proper error handling for type mismatches.</li>
-                    </ol>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <div className="bg-gray-900/80 rounded-lg border border-gray-800 p-4 shadow-inner">
-                <h3 className="font-medium mb-4">Your Progress</h3>
-
-                <div className="flex justify-center mb-4">
-                  <div className="relative inline-flex">
-                    <svg className="w-24 h-24">
-                      <circle cx="48" cy="48" r="36" fill="transparent" stroke="#374151" strokeWidth="8" />
-                      <circle
-                        cx="48"
-                        cy="48"
-                        r="36"
-                        fill="transparent"
-                        stroke="#3B82F6"
-                        strokeWidth="8"
-                        strokeDasharray="226.2"
-                        strokeDashoffset="131.2"
-                        strokeLinecap="round"
-                        style={{ transform: "rotate(-90deg)", transformOrigin: "center" }}
-                      />
-                    </svg>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="text-lg font-bold">42%</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="space-y-3">
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="text-gray-400">Videos</span>
-                    <span>3/7 completed</span>
-                  </div>
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="text-gray-400">Assignments</span>
-                    <span>2/7 completed</span>
-                  </div>
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="text-gray-400">Quizzes</span>
-                    <span>1/7 completed</span>
-                  </div>
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="text-gray-400">Total Duration</span>
-                    <span>1h 45m</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <img
+            src="/demo.png"
+            alt="Demo"
+            className="w-full h-auto object-contain max-h-[80vh]"
+          />
         </div>
       </section>
 
@@ -471,23 +131,24 @@ export default function LandingPage() {
       <section className="relative z-10 container mx-auto px-4 py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
           <div className="bg-black/40 backdrop-blur-sm border border-gray-800 rounded-lg p-6 text-center">
-            <div className="text-4xl font-bold mb-2">0</div>
-            <div className="text-gray-400 text-sm">Total Solved</div>
+            <div className="text-4xl font-bold mb-2 break-words">Notes</div>
+            <div className="text-gray-400 text-sm">Write down important points in the notes section for each video.</div>
           </div>
           <div className="bg-black/40 backdrop-blur-sm border border-gray-800 rounded-lg p-6 text-center">
-            <div className="text-4xl font-bold text-green-500 mb-2">0</div>
-            <div className="text-gray-400 text-sm">Easy</div>
+            <div className="text-4xl font-bold text-green-500 mb-2 break-words">Docs</div>
+            <div className="text-gray-400 text-sm">After watching the video, read the related documentation to fill any gaps.</div>
           </div>
           <div className="bg-black/40 backdrop-blur-sm border border-gray-800 rounded-lg p-6 text-center">
-            <div className="text-4xl font-bold text-yellow-500 mb-2">0</div>
-            <div className="text-gray-400 text-sm">Medium</div>
+            <div className="text-4xl font-bold text-yellow-500 mb-2 break-words">Quizzes</div>
+            <div className="text-gray-400 text-sm">Test your understanding after finishing each video.</div>
           </div>
           <div className="bg-black/40 backdrop-blur-sm border border-gray-800 rounded-lg p-6 text-center">
-            <div className="text-4xl font-bold text-red-500 mb-2">0</div>
-            <div className="text-gray-400 text-sm">Hard</div>
+            <div className="text-4xl font-bold text-red-500 mb-2 break-words">Exercise</div>
+            <div className="text-gray-400 text-sm">Practice more by attempting the assignment for each video.</div>
           </div>
         </div>
       </section>
+
 
       {/* Twitter Reviews Section */}
       <section className="relative z-10 container mx-auto px-4 py-16">
