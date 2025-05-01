@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 import { BookOpen, ExternalLink, ChevronDown, FileText, Code, Globe } from "lucide-react"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 import { Badge } from "@/components/ui/badge"
@@ -18,10 +19,27 @@ interface DocumentationSectionProps {
   videoTitle: string
   resources: DocumentationItem[]
   isLoading?: boolean
+  onAddResource: (resource: DocumentationItem) => void
 }
 
-export function DocumentationSection({ videoId, videoTitle, resources, isLoading = false }: DocumentationSectionProps) {
+export function DocumentationSection({ videoId, videoTitle, resources, isLoading = false, onAddResource }: DocumentationSectionProps) {
   const [isOpen, setIsOpen] = useState(false)
+  const [newTitle, setNewTitle] = useState("")
+  const [newUrl, setNewUrl] = useState("")
+
+  const handleAddResource = () => {
+    if (newTitle && newUrl) {
+      const newResource: DocumentationItem = {
+        title: newTitle,
+        url: newUrl,
+        type: "documentation", // Default type for added resources
+        source: new URL(newUrl).hostname, // Extract the hostname from the URL
+      }
+      onAddResource(newResource)
+      setNewTitle("")
+      setNewUrl("")
+    }
+  }
 
   const getIconForType = (type: string) => {
     switch (type) {
@@ -116,6 +134,24 @@ export function DocumentationSection({ videoId, videoTitle, resources, isLoading
             <p>No additional resources found for this video.</p>
           </div>
         )}
+
+        <div className="mt-4">
+          <Input
+            placeholder="Title"
+            value={newTitle}
+            onChange={(e) => setNewTitle(e.target.value)}
+            className="mb-2"
+          />
+          <Input
+            placeholder="URL"
+            value={newUrl}
+            onChange={(e) => setNewUrl(e.target.value)}
+            className="mb-2"
+          />
+          <Button onClick={handleAddResource} className="bg-green-600 text-white">
+            Add Resource
+          </Button>
+        </div>
 
         <div className="flex justify-between items-center mt-4 pt-3 border-t border-gray-700">
           <p className="text-xs text-gray-400">

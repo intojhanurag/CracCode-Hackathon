@@ -80,7 +80,7 @@ export default function LandingPage() {
             <Button
               variant="outline"
               size="sm"
-              className="hidden md:flex gap-2 border-indigo-700/30 bg-black/50 backdrop-blur-sm text-indigo-400 hover:bg-indigo-900/20"
+              className="hidden md:flex gap-2 border-red-700/30 bg-black/50 backdrop-blur-sm text-red-400 hover:bg-indigo-900/20"
             >
               <Github className="h-4 w-4" />
               <span>Star on GitHub</span>
@@ -98,7 +98,7 @@ export default function LandingPage() {
             </Link>
           ) : (
             <Link href="/sign-in">
-              <Button className="bg-gradient-to-r from-purple-600 via-blue-600 to-purple-600 hover:from-purple-700 hover:via-blue-700 hover:to-purple-700 border-0">
+              <Button className="bg-gradient-to-r from-red-600 via-red-600 to-red-600 hover:from-red-700 hover:via-red-700 hover:to-red-700 border-0">
                 Login
               </Button>
             </Link>
