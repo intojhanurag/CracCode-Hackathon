@@ -22,6 +22,7 @@ export function PlaylistDashboard() {
   const [currentPlaylist, setCurrentPlaylist] = useState<YouTubePlaylist | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [completedVideos, setCompletedVideos] = useState(0); // State for completed videos
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -40,7 +41,15 @@ export function PlaylistDashboard() {
 
       // Fetch playlist details
       const playlist = await fetchPlaylistDetails(playlistId)
-      setCurrentPlaylist(playlist)
+      const normalizedPlaylist = {
+        ...playlist,
+        videos: playlist.videos.map((video) => ({
+          ...video,
+          completed: video.completed ?? false, // Default to `false` if `undefined`
+        })),
+      };
+  
+      setCurrentPlaylist(normalizedPlaylist)
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to load playlist")
       console.error(err)
@@ -49,9 +58,14 @@ export function PlaylistDashboard() {
     }
   }
 
+  const handleProgressUpdate = (completed: number) => {
+    setCompletedVideos(completed); // Update completed videos count
+  };
+
   const handleReset = () => {
     setCurrentPlaylist(null)
     setPlaylistUrl("")
+    setCompletedVideos(0); // Reset completed videos count
   }
 
   function extractPlaylistId(url: string): string | null {
@@ -218,10 +232,15 @@ export function PlaylistDashboard() {
             <TabsContent value="videos">
               <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
                 <div className="lg:col-span-3">
-                  <VideoList playlist={currentPlaylist} />
+                  <VideoList playlist={currentPlaylist} onProgressUpdate={handleProgressUpdate} />
                 </div>
                 <div className="space-y-6">
-                  <PlaylistStats playlist={currentPlaylist} />
+                  <PlaylistStats
+                    playlist={{
+                      ...currentPlaylist,
+                      completedVideos,
+                    }}
+                  />
 
                   <Card className="bg-gray-900 border-gray-800">
                     <CardContent className="p-4">
@@ -244,46 +263,6 @@ export function PlaylistDashboard() {
                           <span className="font-medium">14 days</span>
                         </div>
                       </div>
-
-                      <Button variant="outline" className="w-full mt-4 text-sm">
-                        View Community
-                      </Button>
-                    </CardContent>
-                  </Card>
-
-                  <Card className="bg-gray-900 border-gray-800">
-                    <CardContent className="p-4">
-                      <h3 className="font-medium mb-3">Your Profile</h3>
-
-                      <div className="flex items-center gap-3 mb-4">
-                        <Avatar className="h-10 w-10">
-                          <AvatarImage src="/placeholder-user.jpg" alt="User" />
-                          <AvatarFallback>JD</AvatarFallback>
-                        </Avatar>
-                        <div>
-                          <p className="font-medium">John Doe</p>
-                          <p className="text-xs text-gray-400">Joined April 2023</p>
-                        </div>
-                      </div>
-
-                      <div className="space-y-2">
-                        <div className="flex justify-between items-center">
-                          <span className="text-sm text-gray-400">Courses Started</span>
-                          <span className="font-medium">12</span>
-                        </div>
-                        <div className="flex justify-between items-center">
-                          <span className="text-sm text-gray-400">Courses Completed</span>
-                          <span className="font-medium">8</span>
-                        </div>
-                        <div className="flex justify-between items-center">
-                          <span className="text-sm text-gray-400">Total Learning Time</span>
-                          <span className="font-medium">43h 12m</span>
-                        </div>
-                      </div>
-
-                      <Button variant="outline" className="w-full mt-4 text-sm">
-                        View Profile
-                      </Button>
                     </CardContent>
                   </Card>
                 </div>

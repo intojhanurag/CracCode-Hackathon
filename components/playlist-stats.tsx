@@ -7,12 +7,13 @@ interface PlaylistStatsProps {
     totalVideos: number
     totalDuration: string
     videos: Array<{ completed: boolean }>
+    completedVideos:number;
   }
 }
 
 export function PlaylistStats({ playlist }: PlaylistStatsProps) {
   const completedVideos = playlist.videos.filter((video) => video.completed).length
-  const completionPercentage = Math.round((completedVideos / playlist.totalVideos) * 100)
+  const completionPercentage = Math.round((playlist.completedVideos / playlist.totalVideos) * 100)
 
   return (
     <Card className="bg-gray-900 border-gray-800">
@@ -30,7 +31,7 @@ export function PlaylistStats({ playlist }: PlaylistStatsProps) {
             className="mb-4"
           />
           <p className="text-sm text-gray-400">
-            {completedVideos} of {playlist.totalVideos} videos completed
+            {playlist.completedVideos} of {playlist.totalVideos} videos completed
           </p>
         </div>
 

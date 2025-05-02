@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { YoutubeIcon, ChevronDown, BookOpen } from "lucide-react";
+import { YoutubeIcon, ChevronDown, BookOpen, Award, FileText } from "lucide-react";
 import Image from "next/image";
 
 interface Video {
@@ -21,29 +21,55 @@ interface PlaylistProps {
   playlist: {
     videos: Video[];
   };
+  onProgressUpdate: (completedVideos: number) => void;
 }
 
-export function VideoList({ playlist }: PlaylistProps) {
+export function VideoList({ playlist, onProgressUpdate }: PlaylistProps) {
   const [videos, setVideos] = useState(playlist.videos);
   const [notes, setNotes] = useState<Record<string, string>>({});
   const [assignments, setAssignments] = useState<Record<string, string>>({});
-  const [openAssignments, setOpenAssignments] = useState<Record<string, boolean>>({});
+  const [documentationLinks, setDocumentationLinks] = useState<Record<string, { title: string; url: string }[]>>({});
+  const [openSections, setOpenSections] = useState<Record<string, { quiz: boolean; documentation: boolean }>>({});
+  const [openNotes, setOpenNotes] = useState<Record<string, boolean>>({}); // New state for Notes
 
   const toggleVideoCompletion = (videoId: string) => {
-    setVideos(videos.map((video) => (video.id === videoId ? { ...video, completed: !video.completed } : video)));
+    const updatedVideos = videos.map((video) =>
+      video.id === videoId ? { ...video, completed: !video.completed } : video
+    );
+    setVideos(updatedVideos);
+
+    // Pass the updated videos array to the parent component
+    onProgressUpdate(updatedVideos.filter((video) => video.completed).length);
+  };
+
+  const handleToggleSection = (videoId: string, section: "quiz" | "documentation") => {
+    setOpenSections((prev) => ({
+      ...prev,
+      [videoId]: {
+        ...prev[videoId],
+        [section]: !prev[videoId]?.[section],
+      },
+    }));
+  };
+
+  const handleToggleNotes = (videoId: string) => {
+    setOpenNotes((prev) => ({
+      ...prev,
+      [videoId]: !prev[videoId],
+    }));
+  };
+
+  const handleAddDocumentationLink = (videoId: string, title: string, url: string) => {
+    setDocumentationLinks((prev) => ({
+      ...prev,
+      [videoId]: [...(prev[videoId] || []), { title, url }],
+    }));
   };
 
   const handleSaveNotes = (videoId: string, note: string) => {
     setNotes((prev) => ({
       ...prev,
       [videoId]: note,
-    }));
-  };
-
-  const handleSaveAssignment = (videoId: string, assignment: string) => {
-    setAssignments((prev) => ({
-      ...prev,
-      [videoId]: assignment,
     }));
   };
 
@@ -95,11 +121,15 @@ export function VideoList({ playlist }: PlaylistProps) {
                 </div>
 
                 {/* Notes Section */}
-                <Collapsible open={!!notes[video.id]} onOpenChange={() => {}}>
+                <Collapsible open={!!openNotes[video.id]} onOpenChange={() => handleToggleNotes(video.id)}>
                   <CollapsibleTrigger asChild>
                     <Button variant="ghost" size="sm" className="p-0 h-auto text-xs text-green-400 mt-2">
                       Notes
-                      <ChevronDown className={`h-3 w-3 ml-1 transition-transform ${notes[video.id] ? "rotate-180" : ""}`} />
+                      <ChevronDown
+                        className={`h-3 w-3 ml-1 transition-transform ${
+                          openNotes[video.id] ? "rotate-180" : ""
+                        }`}
+                      />
                     </Button>
                   </CollapsibleTrigger>
                   <CollapsibleContent className="mt-3 p-4 bg-gray-800/50 rounded-md text-sm">
@@ -109,42 +139,106 @@ export function VideoList({ playlist }: PlaylistProps) {
                       value={notes[video.id] || ""}
                       onChange={(e) => handleSaveNotes(video.id, e.target.value)}
                     />
+                    {notes[video.id] && (
+                      <div className="mt-4 p-2 bg-gray-700 rounded-md text-white">
+                        <strong>Your Notes:</strong>
+                        <p>{notes[video.id]}</p>
+                      </div>
+                    )}
                   </CollapsibleContent>
                 </Collapsible>
 
                 {/* Assignment Section */}
-                <Collapsible
-                  open={openAssignments[video.id]}
-                  onOpenChange={() =>
-                    setOpenAssignments((prev) => ({ ...prev, [video.id]: !prev[video.id] }))
-                  }
-                >
+                <Collapsible>
                   <CollapsibleTrigger asChild>
                     <Button variant="ghost" size="sm" className="p-0 h-auto text-xs text-blue-400 mt-2">
                       <BookOpen className="h-3 w-3 mr-1" />
                       Assignment
+                      <ChevronDown className="h-3 w-3 ml-1 transition-transform" />
+                    </Button>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent className="mt-3 p-4 bg-gray-800/50 rounded-md text-sm">
+                    <div className="text-center text-gray-400">Coming Soon</div>
+                  </CollapsibleContent>
+                </Collapsible>
+
+                {/* Quiz Section */}
+                <Collapsible open={!!openSections[video.id]?.quiz} onOpenChange={() => handleToggleSection(video.id, "quiz")}>
+                  <CollapsibleTrigger asChild>
+                    <Button variant="ghost" size="sm" className="p-0 h-auto text-xs text-yellow-400 mt-2">
+                      <Award className="h-3 w-3 mr-1" />
+                      Quiz
                       <ChevronDown
                         className={`h-3 w-3 ml-1 transition-transform ${
-                          openAssignments[video.id] ? "rotate-180" : ""
+                          openSections[video.id]?.quiz ? "rotate-180" : ""
                         }`}
                       />
                     </Button>
                   </CollapsibleTrigger>
                   <CollapsibleContent className="mt-3 p-4 bg-gray-800/50 rounded-md text-sm">
-                    <textarea
-                      className="w-full bg-gray-900 text-white border border-gray-700 rounded-md p-2"
-                      placeholder="Write your assignment here..."
-                      value={assignments[video.id] || ""}
-                      onChange={(e) => handleSaveAssignment(video.id, e.target.value)}
-                    />
+                    <div className="text-center text-gray-400">Coming Soon</div>
                   </CollapsibleContent>
                 </Collapsible>
 
-                {/* Other Features */}
-                <div className="mt-4 text-sm text-gray-400">
-                  <p>Quiz: <span className="text-yellow-400">Coming Soon</span></p>
-                  <p>Documentation: <span className="text-purple-400">Coming Soon</span></p>
-                </div>
+                {/* Documentation Section */}
+                <Collapsible
+                  open={!!openSections[video.id]?.documentation}
+                  onOpenChange={() => handleToggleSection(video.id, "documentation")}
+                >
+                  <CollapsibleTrigger asChild>
+                    <Button variant="ghost" size="sm" className="p-0 h-auto text-xs text-purple-400 mt-2">
+                      <FileText className="h-3 w-3 mr-1" />
+                      Documentation
+                      <ChevronDown
+                        className={`h-3 w-3 ml-1 transition-transform ${
+                          openSections[video.id]?.documentation ? "rotate-180" : ""
+                        }`}
+                      />
+                    </Button>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent className="mt-3 p-4 bg-gray-800/50 rounded-md text-sm">
+                    <div className="space-y-2">
+                      {(documentationLinks[video.id] || []).map((link, idx) => (
+                        <div key={idx} className="flex items-center justify-between">
+                          <a
+                            href={link.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-400 hover:underline"
+                          >
+                            {link.title}
+                          </a>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="mt-4">
+                      <input
+                        type="text"
+                        placeholder="Title"
+                        className="w-full bg-gray-900 text-white border border-gray-700 rounded-md p-2 mb-2"
+                        id={`doc-title-${video.id}`}
+                      />
+                      <input
+                        type="text"
+                        placeholder="URL"
+                        className="w-full bg-gray-900 text-white border border-gray-700 rounded-md p-2 mb-2"
+                        id={`doc-url-${video.id}`}
+                      />
+                      <Button
+                        onClick={() =>
+                          handleAddDocumentationLink(
+                            video.id,
+                            (document.getElementById(`doc-title-${video.id}`) as HTMLInputElement).value,
+                            (document.getElementById(`doc-url-${video.id}`) as HTMLInputElement).value
+                          )
+                        }
+                        className="bg-green-600 text-white"
+                      >
+                        Add Link
+                      </Button>
+                    </div>
+                  </CollapsibleContent>
+                </Collapsible>
               </div>
             </div>
           </div>
