@@ -7,6 +7,7 @@ import { Github, Twitter, Youtube } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useRef, useState } from "react"
 import {useUser} from "@clerk/nextjs";
+import TweetEmbed from "@/components/Tweet-embed"
 import YouTubeHero from "@/components/Youtube-hero"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
@@ -157,188 +158,63 @@ export default function LandingPage() {
           <p className="text-gray-400 max-w-2xl mx-auto">
             Don't just take our word for it. Here's what our users have to say about YTLearn.
           </p>
+
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {/* Tweet 1 */}
           <div className="bg-black/40 backdrop-blur-sm border border-indigo-900/30 rounded-lg p-4 shadow-glow">
-            <div className="flex justify-between items-start mb-3">
-              <div className="flex items-center gap-2">
-                <Avatar className="h-10 w-10">
-                  <AvatarImage src="/placeholder.svg?height=40&width=40" alt="@techguru" />
-                  <AvatarFallback>TG</AvatarFallback>
-                </Avatar>
-                <div>
-                  <div className="font-medium">Alex Chen</div>
-                  <div className="text-sm text-gray-400">@techguru</div>
-                </div>
-              </div>
-              <Twitter className="h-5 w-5 text-blue-400" />
-            </div>
-            <p className="mb-3">
-              An aesthetic masterpiece! YTLearn transformed how I study programming tutorials. The AI-generated
-              assignments and quizzes are incredibly helpful. 👌🔥
-            </p>
-            <div className="text-xs text-gray-500">6:44 PM · Apr 12, 2025</div>
-            <div className="flex items-center gap-4 mt-3 text-gray-400">
-              <div className="flex items-center gap-1">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
-                </svg>
-                <span>12</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                </svg>
-                <span>3</span>
-              </div>
-            </div>
+            <a
+              href="https://x.com/adxtya_jha/status/1918196048058830884"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src="/aditya.png" alt="Tweet screenshot" className="rounded-lg w-full h-auto max-h-[600px] object-cover shadow-glow" />
+
+            </a>
           </div>
 
           {/* Tweet 2 */}
           <div className="bg-black/40 backdrop-blur-sm border border-indigo-900/30 rounded-lg p-4 shadow-glow">
-            <div className="flex justify-between items-start mb-3">
-              <div className="flex items-center gap-2">
-                <Avatar className="h-10 w-10">
-                  <AvatarImage src="/placeholder.svg?height=40&width=40" alt="@codemaster" />
-                  <AvatarFallback>CM</AvatarFallback>
-                </Avatar>
-                <div>
-                  <div className="font-medium">Priya Sharma</div>
-                  <div className="text-sm text-gray-400">@codemaster</div>
-                </div>
-              </div>
-              <Twitter className="h-5 w-5 text-blue-400" />
-            </div>
-            <p className="mb-3">
-              From watching random YouTube tutorials to structured learning with quizzes and documentation, we came a
-              long way! YTLearn is a game changer for self-taught developers. 💯
-            </p>
-            <div className="text-xs text-gray-500">6:53 PM · Apr 10, 2025</div>
-            <div className="flex items-center gap-4 mt-3 text-gray-400">
-              <div className="flex items-center gap-1">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
-                </svg>
-                <span>24</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                </svg>
-                <span>7</span>
-              </div>
-            </div>
+            <a
+                href="https://x.com/Paradoxical_xD/status/1918246195878564219"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+              <img src="/gautam.png" alt="Tweet screenshot" className="rounded-lg w-full h-auto max-h-[600px] object-cover shadow-glow" />
+
+            </a>
+            
           </div>
 
           {/* Tweet 3 */}
           <div className="bg-black/40 backdrop-blur-sm border border-indigo-900/30 rounded-lg p-4 shadow-glow">
-            <div className="flex justify-between items-start mb-3">
-              <div className="flex items-center gap-2">
-                <Avatar className="h-10 w-10">
-                  <AvatarImage src="/placeholder.svg?height=40&width=40" alt="@devninja" />
-                  <AvatarFallback>DN</AvatarFallback>
-                </Avatar>
-                <div>
-                  <div className="font-medium">Harshit Khosla</div>
-                  <div className="text-sm text-gray-400">@devninja</div>
-                </div>
-              </div>
-              <Twitter className="h-5 w-5 text-blue-400" />
-            </div>
-            <p className="mb-3">
-              Legend! 🙌 The quiz feature is amazing for testing your knowledge. YTLearn is exactly what I needed for my
-              coding journey.
-            </p>
-            <div className="text-xs text-gray-500">1:43 PM · Apr 11, 2025</div>
-            <div className="flex items-center gap-4 mt-3 text-gray-400">
-              <div className="flex items-center gap-1">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
-                </svg>
-                <span>36</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                </svg>
-                <span>14</span>
-              </div>
-            </div>
+            <a
+              href="https://x.com/diwanshu_28/status/1918209912917901468"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+            <img src="/third.png" alt="Tweet screenshot" className="rounded-lg w-full h-auto max-h-[800px] object-cover shadow-glow" />
+
+           </a>
+            
           </div>
         </div>
 
         <div className="text-center mt-10">
           <Button
             variant="outline"
+            
             className="border-indigo-700/30 bg-black/50 backdrop-blur-sm gap-2 text-indigo-400 hover:bg-indigo-900/20"
           >
             <Twitter className="h-4 w-4 text-blue-400" />
-            <span>See more on Twitter</span>
+            <a href="https://x.com/AnuragOjha8355/status/1918195374335889569">
+              <span>See more on Twitter</span>
+            </a>      
           </Button>
         </div>
       </section>
+      <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
 
       {/* Footer */}
       <footer className="relative z-10 container mx-auto px-4 py-8 text-center text-gray-400 text-sm">

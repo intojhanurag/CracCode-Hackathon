@@ -4,6 +4,7 @@ import type React from "react"
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
+import { useUser } from "@clerk/nextjs"; // Import Clerk'
 import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
 import { VideoList } from "@/components/video-list"
@@ -12,18 +13,27 @@ import { RefreshCw, Edit, Trash2, Share2, BookOpen, Youtube } from "lucide-react
 import { fetchPlaylistDetails, type YouTubePlaylist } from "@/lib/youtube-service"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
+import { Modal } from "@/components/ui/modal";
+
+import { AchievementCard } from "./achievement";
 import Image from "next/image"
 import Link from "next/link"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Github, Users } from "lucide-react"
 
 export function PlaylistDashboard() {
+  const {user}=useUser();
   const [playlistUrl, setPlaylistUrl] = useState("")
   const [currentPlaylist, setCurrentPlaylist] = useState<YouTubePlaylist | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [isAchievementOpen,setIsAchievementOpen]=useState(false);
   const [completedVideos, setCompletedVideos] = useState(0); // State for completed videos
 
+
+  const handleShareProgress = () => {
+    setIsAchievementOpen(true); // Open the AchievementCard overlay
+  };
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!playlistUrl) return
@@ -204,24 +214,31 @@ export function PlaylistDashboard() {
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <Button variant="outline" size="sm" className="gap-1">
+              <Button variant="outline" size="sm" className="gap-1" onClick={handleShareProgress}>
                 <Share2 className="h-4 w-4" />
-                <span>Share</span>
+                <span>Share Your Progress</span>
               </Button>
-              <Button variant="outline" size="sm" className="gap-1">
-                <RefreshCw className="h-4 w-4" />
-                <span>Refresh</span>
-              </Button>
-              <Button variant="outline" size="sm" className="gap-1">
-                <Edit className="h-4 w-4" />
-                <span>Edit</span>
-              </Button>
+              
               <Button variant="destructive" size="sm" className="gap-1" onClick={handleReset}>
                 <Trash2 className="h-4 w-4" />
                 <span className="hidden md:inline">Remove</span>
               </Button>
             </div>
           </div>
+          {isAchievementOpen && (
+            <Modal onClose={() => setIsAchievementOpen(false)}>
+              <AchievementCard
+                userData={{
+                 
+                  email:user.email,
+                  completedVideos,
+                  playlistName: currentPlaylist.title,
+                  playlistUrl: playlistUrl,
+                  avatarUrl: "/profile.webp",
+                }}
+              />
+            </Modal>
+          )}
 
           <Tabs defaultValue="videos" className="w-full">
             <TabsList className="mb-4">
