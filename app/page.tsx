@@ -165,11 +165,11 @@ export default function LandingPage() {
           {/* Tweet 1 */}
           <div className="bg-black/40 backdrop-blur-sm border border-indigo-900/30 rounded-lg p-4 shadow-glow">
             <a
-              href="https://x.com/adxtya_jha/status/1918196048058830884"
+              href="https://x.com/Kaustubh_jain__/status/1918253266460393720"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <img src="/aditya.png" alt="Tweet screenshot" className="rounded-lg w-full h-auto max-h-[600px] object-cover shadow-glow" />
+              <img src="/image3.png" alt="Tweet screenshot" className="rounded-lg w-full h-auto max-h-[600px] object-cover shadow-glow" />
 
             </a>
           </div>
@@ -181,7 +181,7 @@ export default function LandingPage() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-              <img src="/gautam.png" alt="Tweet screenshot" className="rounded-lg w-full h-auto max-h-[600px] object-cover shadow-glow" />
+              <img src="/image0.png" alt="Tweet screenshot" className="rounded-lg w-full h-auto max-h-[600px] object-cover shadow-glow" />
 
             </a>
             
@@ -194,7 +194,40 @@ export default function LandingPage() {
               target="_blank"
               rel="noopener noreferrer"
             >
-            <img src="/third.png" alt="Tweet screenshot" className="rounded-lg w-full h-auto max-h-[800px] object-cover shadow-glow" />
+            <img src="/image2.png" alt="Tweet screenshot" className="rounded-lg w-full h-auto max-h-[800px] object-cover shadow-glow" />
+
+           </a>
+            
+          </div>
+          <div className="bg-black/40 backdrop-blur-sm border border-indigo-900/30 rounded-lg p-4 shadow-glow">
+            <a
+              href="https://x.com/DevNinjaShubham/status/1918357493744279826"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+            <img src="/image4.png" alt="Tweet screenshot" className="rounded-lg w-full h-auto max-h-[800px] object-cover shadow-glow" />
+
+           </a>
+            
+          </div>
+          <div className="bg-black/40 backdrop-blur-sm border border-indigo-900/30 rounded-lg p-4 shadow-glow">
+            <a
+              href="https://x.com/sambhavvoswal/status/1918216207586468260"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+            <img src="/image5.png" alt="Tweet screenshot" className="rounded-lg w-full h-auto max-h-[800px] object-cover shadow-glow" />
+
+           </a>
+            
+          </div>
+          <div className="bg-black/40 backdrop-blur-sm border border-indigo-900/30 rounded-lg p-4 shadow-glow">
+            <a
+              href="https://x.com/kathan_vakharia/status/1918299189882307041"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+            <img src="/image6.png" alt="Tweet screenshot" className="rounded-lg w-full h-auto max-h-[800px] object-cover shadow-glow" />
 
            </a>
             
