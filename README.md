@@ -84,3 +84,5 @@ For any questions or feedback, feel free to reach out:
 
 ⭐ Star the Repository
 If you found this project helpful, please give it a ⭐ on GitHub!
+![MIT License](https://img.shields.io/badge/license-MIT-green)
+
