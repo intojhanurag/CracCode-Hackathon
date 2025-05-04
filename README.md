@@ -17,7 +17,7 @@ Welcome to **YouTube Learning Platform**, a structured and interactive way to le
 ---
 
 ## 🖼️ Demo videos
-[Watch Demo Video](https://github.com/intojhanurag/Yt-Learn/blob/1fe38cfa42bef26e6d2ed3ee9fdb911ae4b0a151/lv_0_20250502121306.mp4)
+[Watch Demo Video](https://x.com/AnuragOjha8355/status/1918195374335889569)
 
 ![Shots](https://github.com/intojhanurag/Yt-Learn/blob/14147ab396cd8c0fa51679cc95ce5939b04f7c1c/Screenshot%202025-04-30%20191851.png)
 
@@ -53,24 +53,6 @@ Welcome to **YouTube Learning Platform**, a structured and interactive way to le
 4. Run the development server
    pnpm dev
 5. Open http://localhost:3000 in your browser.
-
-📂 Folder Structure:
-.
-├── app/
-│   ├── api/                # API routes
-│   ├── dashboard/          # Dashboard pages
-│   ├── profile/            # User profile pages
-│   ├── sign-in/            # Authentication pages
-│   ├── sign-up/            # Registration pages
-│   └── layout.tsx          # Root layout
-├── components/             # Reusable UI components
-├── hooks/                  # Custom React hooks
-├── lib/                    # Utility functions and services
-├── public/                 # Static assets
-├── styles/                 # Global styles
-├── .env                    # Environment variables
-├── [tailwind.config.ts](http://_vscodecontentref_/0)      # Tailwind CSS configuration
-└── [tsconfig.json](http://_vscodecontentref_/1)           # TypeScript configuration
 
 🛡️ Security
 Environment Variables: Sensitive keys like API keys are stored in .env files.
