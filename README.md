@@ -16,15 +16,10 @@ Welcome to **YouTube Learning Platform**, a structured and interactive way to le
 
 ---
 
-## 🖼️ Screenshots
+## 🖼️ Demo videos
+[Watch Demo Video](https://github.com/intojhanurag/Yt-Learn/blob/1fe38cfa42bef26e6d2ed3ee9fdb911ae4b0a151/lv_0_20250502121306.mp4)
 
-### Video Notes
-![Notes Screenshot](https://github.com/intojhanurag/CracCode-Hackathon/blob/cc26380c0963c7abfd1f4f3fd5494e877972c867/Screenshot%202025-04-30%20191851.png)
 
-### Quizzes
-![Quiz Screenshot](https://github.com/intojhanurag/CracCode-Hackathon/blob/7da04a8c3c7c4eb1983ab71d9d47c2f6952af9e3/Screenshot%202025-04-30%20191901.png)
-
----
 
 ## 🚀 Tech Stack
 
