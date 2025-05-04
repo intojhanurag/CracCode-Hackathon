@@ -19,7 +19,7 @@ Welcome to **YouTube Learning Platform**, a structured and interactive way to le
 ## 🖼️ Demo videos
 [Watch Demo Video](https://github.com/intojhanurag/Yt-Learn/blob/1fe38cfa42bef26e6d2ed3ee9fdb911ae4b0a151/lv_0_20250502121306.mp4)
 
-
+[Watch Demo Video](https://github.com/intojhanurag/Yt-Learn/blob/14147ab396cd8c0fa51679cc95ce5939b04f7c1c/Screenshot%202025-04-30%20191851.png)
 
 ## 🚀 Tech Stack
 
