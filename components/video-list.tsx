@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { YoutubeIcon, ChevronDown, BookOpen, Award, FileText } from "lucide-react";
+import { Modal } from "./ui/modal";
 import Image from "next/image";
 
 interface Video {
@@ -30,7 +31,23 @@ export function VideoList({ playlist, onProgressUpdate }: PlaylistProps) {
   const [assignments, setAssignments] = useState<Record<string, string>>({});
   const [documentationLinks, setDocumentationLinks] = useState<Record<string, { title: string; url: string }[]>>({});
   const [openSections, setOpenSections] = useState<Record<string, { quiz: boolean; documentation: boolean }>>({});
+  const [isModalOpen,setIsModalOpen]=useState(false);
+
+  const [isIframeLoaded,setIsIframeLoaded]=useState(false);
+  const [currentVideoUrl, setCurrentVideoUrl] = useState<string | null>(null);
   const [openNotes, setOpenNotes] = useState<Record<string, boolean>>({}); // New state for Notes
+
+
+  const openModal = (videoUrl: string) => {
+    setCurrentVideoUrl(videoUrl);
+    setIsIframeLoaded(false);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setCurrentVideoUrl(null);
+    setIsModalOpen(false);
+  };
 
   const toggleVideoCompletion = (videoId: string) => {
     const updatedVideos = videos.map((video) =>
@@ -74,7 +91,8 @@ export function VideoList({ playlist, onProgressUpdate }: PlaylistProps) {
   };
 
   return (
-    <div className="rounded-lg border border-gray-800 bg-gray-900 overflow-hidden">
+    
+    <div className="rounded-lg border border-gray-800 bg-gray-900 overflow-hidden relative z-10">
       <div className="p-4 border-b border-gray-800 bg-gray-800/50">
         <h2 className="text-lg font-semibold">Course Content</h2>
         <p className="text-sm text-gray-400">Complete all videos and assignments to finish the course</p>
@@ -84,7 +102,10 @@ export function VideoList({ playlist, onProgressUpdate }: PlaylistProps) {
         {videos.map((video, index) => (
           <div key={video.id} className={`p-4 ${video.completed ? "bg-gray-800/30" : ""}`}>
             <div className="flex items-start gap-4">
-              <div className="flex-shrink-0 relative">
+
+              {/* Thumbnail */}
+              <div className="flex-shrink-0 relative cursor-pointer"
+              onClick={()=>openModal(`https://www.youtube.com/embed/${video.id}`)}>
                 {video.thumbnailUrl ? (
                   <Image
                     src={video.thumbnailUrl || "/placeholder.svg"}
@@ -100,11 +121,12 @@ export function VideoList({ playlist, onProgressUpdate }: PlaylistProps) {
                 )}
                 <div className="absolute bottom-1 right-1 bg-black/80 text-xs px-1 rounded">{video.duration}</div>
               </div>
-
+              {/* Description */}
               <div className="flex-1 min-w-0">
                 <div className="flex items-start justify-between">
                   <div>
-                    <h3 className="font-medium line-clamp-2">
+                    <h3 className="font-medium line-clamp-2 cursor-pointer text-blue-400 hover:underline"
+                    onClick={()=>openModal(`https://www.youtube.com/embed/${video.id}`)}>
                       {index + 1}. {video.title}
                     </h3>
                     <div className="flex items-center gap-2 mt-1">
@@ -119,8 +141,40 @@ export function VideoList({ playlist, onProgressUpdate }: PlaylistProps) {
                     </div>
                   </div>
                 </div>
-
-                {/* Notes Section */}
+                {/* Modal for YouTube Video */}
+                
+                {/* Modal for YouTube Video */}
+                {isModalOpen && (
+                  <Modal onClose={closeModal}>
+                    <div className="relative w-full h-0 pb-[56.25%]">
+                      {currentVideoUrl ? (
+                        <>
+                        {/* Loading spinner */}
+                          <div
+                            className={`absolute top-0 left-0 w-full h-full flex items-center justify-center bg-black ${
+                              isIframeLoaded ? "hidden" : "block"
+                            }`}
+                          >
+                            <div className="loader"></div> {/* Add your spinner here */}
+                          </div>
+                          <iframe
+                            src={currentVideoUrl}
+                            title="YouTube video"
+                            className="absolute top-0 left-0 w-full h-full rounded-lg"
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                            onLoad={() => setIsIframeLoaded(true)} // Set iframe loaded state
+                          ></iframe>
+                        </>
+                      ) : (
+                        <div className="flex items-center justify-center w-full h-full bg-gray-800 text-white">
+                          Video not available
+                        </div>
+                      )}
+                    </div>
+                  </Modal>
+                )}
                 <Collapsible open={!!openNotes[video.id]} onOpenChange={() => handleToggleNotes(video.id)}>
                   <CollapsibleTrigger asChild>
                     <Button variant="ghost" size="sm" className="p-0 h-auto text-xs text-green-400 mt-2">
@@ -245,5 +299,7 @@ export function VideoList({ playlist, onProgressUpdate }: PlaylistProps) {
         ))}
       </div>
     </div>
+   
   );
 }
+
