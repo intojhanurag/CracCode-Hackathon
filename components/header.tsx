@@ -57,6 +57,12 @@ export function Header() {
             >
               Dashboard
             </Link>
+            <Link
+              href="/course"
+              className="px-4 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-700 transition"
+            >
+              My Course
+            </Link>
             <Badge variant="secondary" className="gap-1">
               <Users className="h-3 w-3" />
               <span>1,234 users</span>

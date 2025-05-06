@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { useUser } from "@clerk/nextjs"; // Import Clerk'
 import { Input } from "@/components/ui/input"
@@ -30,27 +30,35 @@ export function PlaylistDashboard() {
   const [isAchievementOpen,setIsAchievementOpen]=useState(false);
   const [completedVideos, setCompletedVideos] = useState(0); // State for completed videos
 
-
+  // useEffect(() => {
+  //   const storedPlaylist = localStorage.getItem("userPlaylists");
+  //   if (storedPlaylist) {
+  //     const parsedPlaylist = JSON.parse(storedPlaylist);
+  //     setCurrentPlaylist(parsedPlaylist);
+  //     setPlaylistUrl(parsedPlaylist.url || "");
+  //   }
+  // }, []);
   const handleShareProgress = () => {
     setIsAchievementOpen(true); // Open the AchievementCard overlay
   };
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!playlistUrl) return
-
-    setIsLoading(true)
-    setError(null)
-
+    e.preventDefault();
+    if (!playlistUrl) return;
+  
+    setIsLoading(true);
+    setError(null);
+  
     try {
       // Extract playlist ID from URL
-      const playlistId = extractPlaylistId(playlistUrl)
+      const playlistId = extractPlaylistId(playlistUrl);
 
+  
       if (!playlistId) {
-        throw new Error("Invalid YouTube playlist URL")
+        throw new Error("Invalid YouTube playlist URL");
       }
-
+  
       // Fetch playlist details
-      const playlist = await fetchPlaylistDetails(playlistId)
+      const playlist = await fetchPlaylistDetails(playlistId);
       const normalizedPlaylist = {
         ...playlist,
         videos: playlist.videos.map((video) => ({
@@ -59,14 +67,34 @@ export function PlaylistDashboard() {
         })),
       };
   
-      setCurrentPlaylist(normalizedPlaylist)
+      setCurrentPlaylist(normalizedPlaylist);
+  
+      // Retrieve existing playlists from localStorage
+      let existingPlaylists = JSON.parse(localStorage.getItem("userPlaylists") || "[]");
+      
+      if (!Array.isArray(existingPlaylists)) {
+        console.warn("Invalid data in localStorage, resetting to an empty array.");
+        existingPlaylists = [];
+      }
+      // Check if the playlist already exists to avoid duplicates
+      const isDuplicate = existingPlaylists.some((p: any) => p.id === normalizedPlaylist.id);
+      if (isDuplicate) {
+        throw new Error("This playlist is already saved.");
+      }
+  
+      // Append the new playlist to the array
+      const updatedPlaylists = [...existingPlaylists, normalizedPlaylist];
+      console.log(updatedPlaylists);
+  
+      // Save the updated array back to localStorage
+      localStorage.setItem("userPlaylists", JSON.stringify(updatedPlaylists));
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to load playlist")
-      console.error(err)
+      setError(err instanceof Error ? err.message : "Failed to load playlist");
+      console.error(err);
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   const handleProgressUpdate = (completed: number) => {
     setCompletedVideos(completed); // Update completed videos count
@@ -99,6 +127,7 @@ export function PlaylistDashboard() {
       return null
     }
   }
+  
 
   return (
     <div className="container mx-auto px-4 py-8">
