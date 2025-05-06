@@ -1,3 +1,4 @@
+![MIT License](https://img.shields.io/badge/license-MIT-green)
 # 🎓 YouTube Learning Platform
 
 Welcome to **YouTube Learning Platform**, a structured and interactive way to learn from YouTube playlists. This platform transforms YouTube videos into a course-like experience with features like progress tracking, quizzes, assignments, and documentation resources. 🚀
@@ -84,3 +85,5 @@ For any questions or feedback, feel free to reach out:
 
 ⭐ Star the Repository
 If you found this project helpful, please give it a ⭐ on GitHub!
+
+
