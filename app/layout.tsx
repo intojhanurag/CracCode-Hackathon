@@ -24,19 +24,19 @@ export default function RootLayout({
   const themeClass="dark"
   return (
     <ClerkProvider>
-    <html lang="en" className={themeClass} suppressHydrationWarning>
-      <head>
-        <link rel="icon" href="/logo.png" />
-      </head>
-      
-      <body className={inter.className}>
-      
+      <html lang="en" className={themeClass} suppressHydrationWarning>
+        <head>
+          <link rel="icon" href="/logo.png" />
+        </head>
         
-        <ThemeProvider attribute="class" defaultTheme="dark">
-          {children}
-        </ThemeProvider>
-      </body>
-    </html>
+        <body className={inter.className}>
+        
+          
+          <ThemeProvider attribute="class" defaultTheme="dark">
+            {children}
+          </ThemeProvider>
+        </body>
+      </html>
     </ClerkProvider>
     
   )
