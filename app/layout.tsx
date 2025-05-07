@@ -9,6 +9,7 @@ import { ClerkProvider } from "@clerk/nextjs"
 
 const inter = Inter({ subsets: ["latin"] })
 
+
 export const metadata: Metadata = {
   title: "YouTube Learning Platform",
   description: "Learn from YouTube playlists like a structured course",
@@ -20,11 +21,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const themeClass="dark"
   return (
     <ClerkProvider>
-    <html lang="en">
+    <html lang="en" className={themeClass} suppressHydrationWarning>
       <head>
-        <link rel="icon" href="/logo.jpg" />
+        <link rel="icon" href="/logo.png" />
       </head>
       
       <body className={inter.className}>

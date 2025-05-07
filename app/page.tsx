@@ -5,13 +5,25 @@ import type React from "react"
 import Link from "next/link"
 import { Github, Twitter, Youtube } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import {useUser} from "@clerk/nextjs";
 import TweetEmbed from "@/components/Tweet-embed"
 import YouTubeHero from "@/components/Youtube-hero"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
+
+type DotStyle = {
+  width: string;
+  height: string;
+  top: string;
+  left: string;
+  animationDelay: string;
+  animationDuration: string;
+};
+
 export default function LandingPage() {
+
+  const [dots,setDots]=useState<DotStyle[]>([]);
   const {user}=useUser();
   const demoRef = useRef<HTMLDivElement>(null)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
@@ -27,6 +39,19 @@ export default function LandingPage() {
     setMousePosition({ x, y })
   }
 
+
+  useEffect(() => {
+    const randomDots:DotStyle[] = Array.from({ length: 20 }).map(() => ({
+      width: Math.random() * 4 + 2 + 'px',
+      height: Math.random() * 4 + 2 + 'px',
+      top: Math.random() * 100 + '%',
+      left: Math.random() * 100 + '%',
+      animationDelay: Math.random() * 5 + 's',
+      animationDuration: Math.random() * 10 + 5 + 's',
+    }));
+    setDots(randomDots);
+  }, []);
+  
   const avatarSrc = "/profile.webp";
 
   return (
@@ -49,18 +74,11 @@ export default function LandingPage() {
 
           {/* Animated grid overlay */}
           <div className="absolute inset-0 overflow-hidden">
-            {Array.from({ length: 20 }).map((_, i) => (
+            {dots.map((dot,i) => (
               <div
                 key={i}
                 className="grid-dot absolute rounded-full bg-red-500/20"
-                style={{
-                  width: Math.random() * 4 + 2 + "px",
-                  height: Math.random() * 4 + 2 + "px",
-                  top: Math.random() * 100 + "%",
-                  left: Math.random() * 100 + "%",
-                  animationDelay: Math.random() * 5 + "s",
-                  animationDuration: Math.random() * 10 + 5 + "s",
-                }}
+                style={dot}
               ></div>
             ))}
           </div>

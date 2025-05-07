@@ -6,8 +6,12 @@ import { NextResponse } from "next/server";
 const isProtectedRoute = createRouteMatcher(["/(.*)"]);
 const isPublicRoute = createRouteMatcher(["/"]);
 
-export default clerkMiddleware((auth, req) => {
-  const { userId } = auth(); // ✅ No await
+export default clerkMiddleware(async(auth, req) => {
+
+  console.log("Middleware triggered on:", req.nextUrl.pathname);
+  const { userId } =await auth(); // ✅ No await
+  console.log("User ID:", userId);
+
 
   if (isProtectedRoute(req) && !isPublicRoute(req) && !userId) {
     return NextResponse.redirect(new URL("/sign-in", req.url));
