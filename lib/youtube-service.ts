@@ -1,6 +1,5 @@
 // YouTube API integration
 
-import { YOUTUBE_API_KEY } from "@/app/env";
 
 export interface YouTubeVideo {
   id: string;
@@ -64,7 +63,7 @@ function calculateTotalDuration(videos: YouTubeVideo[]): string {
   return `${minutes}m`;
 }
 
-const apiKey = process.env.YOUTUBE_API_KEY;
+const apiKey = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY;
 export async function fetchPlaylistDetails(playlistId: string): Promise<YouTubePlaylist> {
   try {
     // Step 1: Get playlist details
