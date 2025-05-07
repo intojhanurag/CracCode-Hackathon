@@ -7,8 +7,19 @@
       }
     ],
     "env": {
-      "NEXT_PUBLIC_API_URL": "your_api_url_here",
-      "NEXT_PUBLIC_YOUTUBE_API_KEY": "AIzaSyCwHrIzKCNwNx1mOznscLeWhOsBqnktxPQ"
+      "NEXT_PUBLIC_YOUTUBE_API_KEY": "AIzaSyCwHrIzKCNwNx1mOznscLeWhOsBqnktxPQ",
+      "GROQ_API_KEY": "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",
+      "MONGO_URI": "mongodb+srv://aojharaj2004:arpitojha%40com@cluster0.qhh6b.mongodb.net/",
+      
+      
+      "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY": "pk_test_cHJvLXlldGktNzQuY2xlcmsuYWNjb3VudHMuZGV2JA",
+      "NEXT_PUBLIC_CLERK_SIGN_IN_URL": "/sign-in",
+      "NEXT_PUBLIC_CLERK_SIGN_UP_URL": "/sign-up",
+      "NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL": "/dashboard",
+      "NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL": "/dashboard",
+  
+      
+      "CLERK_SECRET_KEY": "sk_test_6uZ6kx4gEi3XZ3UGgS2D7xGvEgATSeRuJ5Of6O9Jwz"
     },
     "routes": [
       {
