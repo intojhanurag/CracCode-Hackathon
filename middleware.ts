@@ -4,7 +4,7 @@ import { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 // Define routes that should be protected
 const isProtectedRoute = createRouteMatcher([
-  "/dashboard",  // Add the route you want to protect
+  "",  // Add the route you want to protect
       // Add more routes as needed
 ]);
 

@@ -1,15 +1,24 @@
-import type React from "react"
+// app/dashboard/layout.tsx
 import { Header } from "@/components/header"
+import { auth } from "@clerk/nextjs/server"
+import { redirect } from "next/navigation"
+import type { ReactNode } from "react"
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+}: {
+  children: ReactNode
+}) {
+  const { userId } =await auth();
+
+  if (!userId) {
+    redirect("/sign-in");
+  }
+
   return (
     <>
       <Header />
       {children}
     </>
-  )
+  );
 }
