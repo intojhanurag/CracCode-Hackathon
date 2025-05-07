@@ -43,6 +43,7 @@ export function Header() {
           </div>
 
           {/* User Profile, GitHub, and Dashboard */}
+          
           <div className="hidden md:flex items-center gap-4">
             <Link href="https://github.com/intojhanurag/CracCode-Hackathon">
               <Button variant="outline" size="sm" className="gap-2">
@@ -132,6 +133,12 @@ export function Header() {
               className="block px-4 py-2 bg-gray-800 rounded-md hover:bg-gray-700 transition"
             >
               Dashboard
+            </Link>
+            <Link
+              href="/course"
+              className="block px-4 py-2 bg-gray-800 rounded-md hover:bg-gray-700 transition"
+            >
+              My Course
             </Link>
 
             <Link href="https://github.com/intojhanurag/CracCode-Hackathon">
