@@ -64,11 +64,12 @@ function calculateTotalDuration(videos: YouTubeVideo[]): string {
   return `${minutes}m`;
 }
 
+const apiKey = process.env.YOUTUBE_API_KEY;
 export async function fetchPlaylistDetails(playlistId: string): Promise<YouTubePlaylist> {
   try {
     // Step 1: Get playlist details
     const playlistResponse = await fetch(
-      `https://www.googleapis.com/youtube/v3/playlists?part=snippet&id=${playlistId}&key=${YOUTUBE_API_KEY}`
+      `https://www.googleapis.com/youtube/v3/playlists?part=snippet&id=${playlistId}&key=${apiKey}`
     );
     const playlistData = await playlistResponse.json();
 
@@ -80,7 +81,7 @@ export async function fetchPlaylistDetails(playlistId: string): Promise<YouTubeP
 
     // Step 2: Get playlist items (videos)
     const videosResponse = await fetch(
-      `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&maxResults=50&playlistId=${playlistId}&key=${YOUTUBE_API_KEY}`
+      `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&maxResults=50&playlistId=${playlistId}&key=${apiKey}`
     );
     const videosData = await videosResponse.json();
 
@@ -91,7 +92,7 @@ export async function fetchPlaylistDetails(playlistId: string): Promise<YouTubeP
     // Step 3: Get video details (for duration)
     const videoIds = videosData.items.map((item: any) => item.contentDetails.videoId).join(",");
     const videoDetailsResponse = await fetch(
-      `https://www.googleapis.com/youtube/v3/videos?part=contentDetails,snippet&id=${videoIds}&key=${YOUTUBE_API_KEY}`
+      `https://www.googleapis.com/youtube/v3/videos?part=contentDetails,snippet&id=${videoIds}&key=${apiKey}`
     );
     const videoDetailsData = await videoDetailsResponse.json();
 
