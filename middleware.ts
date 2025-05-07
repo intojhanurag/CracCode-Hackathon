@@ -1,19 +1,16 @@
 // middleware.ts
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
-import { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-// Define routes that should be protected
 
+// Define public and protected routes
+const isProtectedRoute = createRouteMatcher(["/(.*)"]);
+const isPublicRoute = createRouteMatcher(["/"]);
 
-const isProtectedRoute = createRouteMatcher(["/(.*)"]); // matches all routes
-const isPublicRoute = createRouteMatcher(["/"]);  
+export default clerkMiddleware((auth, req) => {
+  const { userId } = auth(); // ✅ No await
 
-
-
-export default clerkMiddleware(async(auth, req) => {
-  const {userId}=await auth();
-  if (isProtectedRoute(req)&&!isPublicRoute(req)&&!userId) {
-    return NextResponse.redirect(new URL("/sign-in",req.url));
+  if (isProtectedRoute(req) && !isPublicRoute(req) && !userId) {
+    return NextResponse.redirect(new URL("/sign-in", req.url));
   }
 
   return NextResponse.next();
@@ -22,4 +19,3 @@ export default clerkMiddleware(async(auth, req) => {
 export const config = {
   matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
 };
-
