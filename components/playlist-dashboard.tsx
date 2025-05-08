@@ -30,6 +30,9 @@ export function PlaylistDashboard() {
   const [currentVideoUrl, setCurrentVideoUrl] = useState<string | null>(null);
   const [currentPlaylist, setCurrentPlaylist] = useState<YouTubePlaylist | null>(null)
   const [isLoading, setIsLoading] = useState(false)
+
+  const [currentVideoId, setCurrentVideoId] = useState<string | null>(null);
+
   const [error, setError] = useState<string | null>(null)
   const [isAchievementOpen,setIsAchievementOpen]=useState(false);
   const [completedVideos, setCompletedVideos] = useState(0); // State for completed videos
@@ -43,9 +46,10 @@ export function PlaylistDashboard() {
   //   }
   // }, []);
 
-  const openModal = (url: string) => {
+  const openModal = (videoId:string,url: string) => {
     setCurrentVideoUrl(url);
     setIsModalOpen(true);
+    setCurrentVideoId(videoId);
   };
   const handleShareProgress = () => {
     setIsAchievementOpen(true); // Open the AchievementCard overlay
@@ -136,6 +140,7 @@ export function PlaylistDashboard() {
       return null
     }
   }
+
   
 
   return (
@@ -270,11 +275,13 @@ export function PlaylistDashboard() {
               <AchievementCard
                 userData={{
                  
-                  email:user.email,
+                  email:user?.primaryEmailAddress?.emailAddress??"",
                   completedVideos,
+
                   playlistName: currentPlaylist.title,
                   playlistUrl: playlistUrl,
                   avatarUrl: "/profile.webp",
+                  thumbnailUrl:currentPlaylist.thumbnailUrl
                 }}
               />
             </Modal>
@@ -282,15 +289,25 @@ export function PlaylistDashboard() {
 
           <Tabs defaultValue="videos" className="w-full">
               
-              {isModalOpen && currentVideoUrl && (
-                  <VideoModal
-                    isOpen={isModalOpen}
-                    onClose={() => setIsModalOpen(false)}
-                    youtubeUrl={currentVideoUrl}
-                  />
-                )}
-                
-             
+            {isModalOpen && currentVideoUrl && (
+                <VideoModal
+                  isOpen={isModalOpen}
+                  onClose={() => setIsModalOpen(false)}
+                  youtubeUrl={currentVideoUrl}
+                  onVideoComplete={() => {
+                    if (currentPlaylist) {
+                      const updatedVideos = currentPlaylist.videos.map((v) =>
+                        v.id === currentVideoId ? { ...v, completed: true } : v
+                      );
+                      setCurrentPlaylist({ ...currentPlaylist, videos: updatedVideos });
+              
+                      // optional: update the counter
+                      setCompletedVideos((prev) => prev + 1);
+                    }
+                  }}
+                  
+                />
+              )}  
             
             <TabsList className="mb-4">
               <TabsTrigger value="videos">Videos</TabsTrigger>

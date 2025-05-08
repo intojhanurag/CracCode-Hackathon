@@ -98,7 +98,7 @@ export function VideoList({ playlist, onProgressUpdate,onOpenModal }: PlaylistPr
 
               {/* Thumbnail */}
               <div className="flex-shrink-0 relative cursor-pointer"
-              onClick={()=>onOpenModal(`https://www.youtube.com/embed/${video.id}`)}>
+              onClick={()=>onOpenModal(video.id,`https://www.youtube.com/embed/${video.id}`)}>
                 {video.thumbnailUrl ? (
                   <Image
                     src={video.thumbnailUrl || "/placeholder.svg"}

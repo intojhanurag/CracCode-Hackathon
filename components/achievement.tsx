@@ -14,6 +14,7 @@ interface AchievementCardProps {
     playlistName: string;
     playlistUrl: string;
     avatarUrl: string;
+    thumbnailUrl:string
   };
 }
 
@@ -56,7 +57,7 @@ export function AchievementCard({ userData }: AchievementCardProps) {
         <CardHeader className="pb-2 pt-6 px-6 flex justify-between items-start">
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-bold text-xl text-red-500">Tube</span>
+              <span className="font-bold text-xl text-red-500">Yt</span>
               <span className="font-bold text-xl">Learn</span>
             </div>
             <h3 className="text-sm text-gray-400">ACHIEVEMENT CARD</h3>
@@ -78,7 +79,7 @@ export function AchievementCard({ userData }: AchievementCardProps) {
             <h2 className="mt-4 text-xl font-bold break-all">{userData.email}</h2>
             <p className="text-gray-400 text-sm break-all">{userData.email}</p>
 
-            <div className="grid grid-cols-2 gap-4 w-full mt-6">
+            <div className="grid grid-cols-2 gap-4  w-full mt-6 text-center">
               <div className="bg-gray-800 rounded-lg p-4 text-center">
                 <p className="text-gray-400 text-xs">Completed Videos</p>
                 <p className="text-2xl font-bold">{userData.completedVideos}</p>
@@ -94,10 +95,19 @@ export function AchievementCard({ userData }: AchievementCardProps) {
             </div>
 
             <div className="mt-6 w-full bg-gray-800 rounded-lg p-4">
-              <p className="text-xs text-gray-400 mb-2">Playlist URL</p>
-              <p className="text-xs break-all">{userData.playlistUrl}</p>
+              <p className="text-xs text-gray-400 mb-2">Playlist</p>
+              {userData.thumbnailUrl && (
+                  <img
+                    src={userData.thumbnailUrl}
+                    alt="Playlist Thumbnail"
+                    crossOrigin="anonymous"
+                    className="w-full h-20 object-cover rounded-md border border-red-600"
+                  />
+                )}
+
             </div>
           </div>
+
         </CardContent>
 
         <CardFooter className="bg-gray-800 p-4 flex justify-between items-center">
@@ -110,7 +120,7 @@ export function AchievementCard({ userData }: AchievementCardProps) {
             onClick={downloadCard}
             className="bg-blue-600 text-white"
           >
-            <Download className="mr-2 h-4 w-4" /> Download
+            <Download className="mr-2 h-4 w-4" /> Don't Click
           </Button>
         </CardFooter>
       </div>
