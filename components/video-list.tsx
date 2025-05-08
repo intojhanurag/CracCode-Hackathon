@@ -7,6 +7,7 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/component
 import { YoutubeIcon, ChevronDown, BookOpen, Award, FileText } from "lucide-react";
 import { Modal } from "./ui/modal";
 import Image from "next/image";
+import { VideoModal } from "./playvideos";
 
 interface Video {
   id: string;
@@ -38,17 +39,11 @@ export function VideoList({ playlist, onProgressUpdate }: PlaylistProps) {
   const [openNotes, setOpenNotes] = useState<Record<string, boolean>>({}); // New state for Notes
 
 
-  const openModal = (videoUrl: string) => {
-    setCurrentVideoUrl(videoUrl);
-    setIsIframeLoaded(false);
+  const openModal=(url:string)=>{
+    setCurrentVideoUrl(url);
     setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setCurrentVideoUrl(null);
-    setIsModalOpen(false);
-  };
-
+  }
+  
   const toggleVideoCompletion = (videoId: string) => {
     const updatedVideos = videos.map((video) =>
       video.id === videoId ? { ...video, completed: !video.completed } : video
@@ -93,6 +88,15 @@ export function VideoList({ playlist, onProgressUpdate }: PlaylistProps) {
   return (
     
     <div className="rounded-lg border border-gray-800 bg-gray-900 overflow-hidden relative z-10">
+      {isModalOpen&& 
+
+        <VideoModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        youtubeUrl={currentVideoUrl || ""}
+      />
+
+      }
       <div className="p-4 border-b border-gray-800 bg-gray-800/50">
         <h2 className="text-lg font-semibold">Course Content</h2>
         <p className="text-sm text-gray-400">Complete all videos and assignments to finish the course</p>
@@ -141,40 +145,7 @@ export function VideoList({ playlist, onProgressUpdate }: PlaylistProps) {
                     </div>
                   </div>
                 </div>
-                {/* Modal for YouTube Video */}
-                
-                {/* Modal for YouTube Video */}
-                {isModalOpen && (
-                  <Modal onClose={closeModal}>
-                    <div className="relative w-full h-0 pb-[56.25%]">
-                      {currentVideoUrl ? (
-                        <>
-                        {/* Loading spinner */}
-                          <div
-                            className={`absolute top-0 left-0 w-full h-full flex items-center justify-center bg-black ${
-                              isIframeLoaded ? "hidden" : "block"
-                            }`}
-                          >
-                            <div className="loader"></div> {/* Add your spinner here */}
-                          </div>
-                          <iframe
-                            src={currentVideoUrl}
-                            title="YouTube video"
-                            className="absolute top-0 left-0 w-full h-full rounded-lg"
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                            onLoad={() => setIsIframeLoaded(true)} // Set iframe loaded state
-                          ></iframe>
-                        </>
-                      ) : (
-                        <div className="flex items-center justify-center w-full h-full bg-gray-800 text-white">
-                          Video not available
-                        </div>
-                      )}
-                    </div>
-                  </Modal>
-                )}
+     
                 <Collapsible open={!!openNotes[video.id]} onOpenChange={() => handleToggleNotes(video.id)}>
                   <CollapsibleTrigger asChild>
                     <Button variant="ghost" size="sm" className="p-0 h-auto text-xs text-green-400 mt-2">
