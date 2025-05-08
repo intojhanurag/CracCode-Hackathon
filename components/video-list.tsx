@@ -24,25 +24,22 @@ interface PlaylistProps {
     videos: Video[];
   };
   onProgressUpdate: (completedVideos: number) => void;
+  onOpenModal: (url: string) => void;
 }
 
-export function VideoList({ playlist, onProgressUpdate }: PlaylistProps) {
+export function VideoList({ playlist, onProgressUpdate,onOpenModal }: PlaylistProps) {
   const [videos, setVideos] = useState(playlist.videos);
   const [notes, setNotes] = useState<Record<string, string>>({});
   const [assignments, setAssignments] = useState<Record<string, string>>({});
   const [documentationLinks, setDocumentationLinks] = useState<Record<string, { title: string; url: string }[]>>({});
   const [openSections, setOpenSections] = useState<Record<string, { quiz: boolean; documentation: boolean }>>({});
-  const [isModalOpen,setIsModalOpen]=useState(false);
+ 
 
   const [isIframeLoaded,setIsIframeLoaded]=useState(false);
-  const [currentVideoUrl, setCurrentVideoUrl] = useState<string | null>(null);
+ 
   const [openNotes, setOpenNotes] = useState<Record<string, boolean>>({}); // New state for Notes
 
 
-  const openModal=(url:string)=>{
-    setCurrentVideoUrl(url);
-    setIsModalOpen(true);
-  }
   
   const toggleVideoCompletion = (videoId: string) => {
     const updatedVideos = videos.map((video) =>
@@ -88,15 +85,7 @@ export function VideoList({ playlist, onProgressUpdate }: PlaylistProps) {
   return (
     
     <div className="rounded-lg border border-gray-800 bg-gray-900 overflow-hidden relative z-10">
-      {isModalOpen&& 
-
-        <VideoModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        youtubeUrl={currentVideoUrl || ""}
-      />
-
-      }
+      
       <div className="p-4 border-b border-gray-800 bg-gray-800/50">
         <h2 className="text-lg font-semibold">Course Content</h2>
         <p className="text-sm text-gray-400">Complete all videos and assignments to finish the course</p>
@@ -109,7 +98,7 @@ export function VideoList({ playlist, onProgressUpdate }: PlaylistProps) {
 
               {/* Thumbnail */}
               <div className="flex-shrink-0 relative cursor-pointer"
-              onClick={()=>openModal(`https://www.youtube.com/embed/${video.id}`)}>
+              onClick={()=>onOpenModal(`https://www.youtube.com/embed/${video.id}`)}>
                 {video.thumbnailUrl ? (
                   <Image
                     src={video.thumbnailUrl || "/placeholder.svg"}
@@ -130,7 +119,7 @@ export function VideoList({ playlist, onProgressUpdate }: PlaylistProps) {
                 <div className="flex items-start justify-between">
                   <div>
                     <h3 className="font-medium line-clamp-2 cursor-pointer text-blue-400 hover:underline"
-                    onClick={()=>openModal(`https://www.youtube.com/embed/${video.id}`)}>
+                    onClick={()=>onOpenModal(`https://www.youtube.com/embed/${video.id}`)}>
                       {index + 1}. {video.title}
                     </h3>
                     <div className="flex items-center gap-2 mt-1">

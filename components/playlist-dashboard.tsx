@@ -20,10 +20,14 @@ import Image from "next/image"
 import Link from "next/link"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Github, Users } from "lucide-react"
+import { VideoModal } from "./playvideos";
 
 export function PlaylistDashboard() {
   const {user}=useUser();
   const [playlistUrl, setPlaylistUrl] = useState("")
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentVideoUrl, setCurrentVideoUrl] = useState<string | null>(null);
   const [currentPlaylist, setCurrentPlaylist] = useState<YouTubePlaylist | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -38,6 +42,11 @@ export function PlaylistDashboard() {
   //     setPlaylistUrl(parsedPlaylist.url || "");
   //   }
   // }, []);
+
+  const openModal = (url: string) => {
+    setCurrentVideoUrl(url);
+    setIsModalOpen(true);
+  };
   const handleShareProgress = () => {
     setIsAchievementOpen(true); // Open the AchievementCard overlay
   };
@@ -133,6 +142,7 @@ export function PlaylistDashboard() {
     <div className="container mx-auto px-4 py-8">
       {!currentPlaylist ? (
         <div className="max-w-3xl mx-auto">
+
           <Card className="bg-gray-900 border-gray-800 overflow-hidden">
             <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-6 text-white">
               <h1 className="text-3xl font-bold mb-2">Transform YouTube into Your Learning Platform</h1>
@@ -254,6 +264,7 @@ export function PlaylistDashboard() {
               </Button>
             </div>
           </div>
+          
           {isAchievementOpen && (
             <Modal onClose={() => setIsAchievementOpen(false)}>
               <AchievementCard
@@ -270,6 +281,17 @@ export function PlaylistDashboard() {
           )}
 
           <Tabs defaultValue="videos" className="w-full">
+              
+              {isModalOpen && currentVideoUrl && (
+                  <VideoModal
+                    isOpen={isModalOpen}
+                    onClose={() => setIsModalOpen(false)}
+                    youtubeUrl={currentVideoUrl}
+                  />
+                )}
+                
+             
+            
             <TabsList className="mb-4">
               <TabsTrigger value="videos">Videos</TabsTrigger>
               <TabsTrigger value="notes">My Notes</TabsTrigger>
@@ -278,7 +300,7 @@ export function PlaylistDashboard() {
             <TabsContent value="videos">
               <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
                 <div className="lg:col-span-3">
-                  <VideoList playlist={currentPlaylist} onProgressUpdate={handleProgressUpdate} />
+                  <VideoList playlist={currentPlaylist} onProgressUpdate={handleProgressUpdate} onOpenModal={openModal} />
                 </div>
                 <div className="space-y-6">
                   <PlaylistStats
